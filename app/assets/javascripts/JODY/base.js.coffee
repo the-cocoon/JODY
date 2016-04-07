@@ -165,6 +165,7 @@ unless @log
     @html_content_replace(data)
     @html_content_append(data)
     @html_content_set(data)
+    @html_value_set(data)
 
   change_attrs: (data) ->
     @attrs_destroy(data)
@@ -181,6 +182,11 @@ unless @log
     if ids = data?.html_content?.set_html
       for id, content of ids
         $(id).html content
+
+  html_value_set: (data) ->
+    if ids = data?.html_content?.set_value
+      for id, value of ids
+        $(id).val value
 
   html_content_replace: (data) ->
     if ids = data?.html_content?.replace

@@ -52,6 +52,9 @@ json.errors @attached_image.errors
 
 ```ruby
 json.set! :html_content, {
+  set_value: {
+    "#some_input" => "New Value",
+  },
   set_html: {
     "#some_block" => "Hello World!",
   },
