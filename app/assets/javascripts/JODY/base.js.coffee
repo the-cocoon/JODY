@@ -159,6 +159,7 @@ unless @log
   processor: (data) ->
     @change_html(data)
     @change_attrs(data)
+    @change_props(data)
 
   change_html: (data) ->
     @html_content_destroy(data)
@@ -168,6 +169,7 @@ unless @log
     @html_value_set(data)
 
   change_attrs: (data) ->
+    @attrs_change(data)
     @attrs_destroy(data)
     @attrs_replace(data)
     @attrs_remove_value(data)
@@ -198,6 +200,13 @@ unless @log
       for id in ids
         $(id).remove()
 
+  attrs_change: (data) ->
+    if change_attrs = data?.html_content?.change_attrs
+      for id, _attrs of change_attrs
+        if (item = $ id).length
+          for attr_name, val of _attrs
+            item.attr(attr_name, val)
+
   attrs_destroy: (data) ->
     if delete_attrs = data?.html_content?.attrs?.destroy
       for id, _attrs of delete_attrs
@@ -227,6 +236,13 @@ unless @log
           for attr_name, val of _attrs
             original_value = item.attr(attr_name) || ''
             item.attr(attr_name, "#{ original_value } #{ val }".trim())
+
+  change_props: (data) ->
+    if props = data?.html_content?.props
+      for id, _props of props
+        if (item = $ id).length
+          for prop_name, val of _props
+            item.prop(prop_name, val)
 
 #################################
 # Jody Inline Errors
