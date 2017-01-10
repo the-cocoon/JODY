@@ -1,4 +1,4 @@
-```
+```coffee
 //= require JODY/base
 //= require ./jody_notificator_init
 ```
